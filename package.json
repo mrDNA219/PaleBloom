@@ -1,0 +1,12 @@
+{
+  "name": "pale-bloom",
+  "version": "0.1.0",
+  "description": "Browser-based virtual pet game inspired by the Bandai Digimon Digital Monster X",
+  "scripts": {
+    "server": "serve . -p 8000"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}
