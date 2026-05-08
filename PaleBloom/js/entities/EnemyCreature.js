@@ -21,12 +21,12 @@
 import * as THREE from 'three';
 import { LIME_VIVID } from '../palette.js';
 
-// ── Movement constants ────────────────────────────────────────────────────────
+// Movement constants
 const DEFAULT_MOVE_SPEED = 2.4;   // fallback if EnemyAI doesn't supply a speed
 const TURN_SPEED         = 3.5;   // radians / second — slow deliberate turn
 const ARRIVAL_DIST       = 0.18;
 
-// ── Animation constants ───────────────────────────────────────────────────────
+// Animation constants
 const HOVER_Y = 0.55;
 const BOB_AMP = 0.06;
 const BOB_SPD = 4.2;
@@ -54,7 +54,7 @@ export class EnemyCreature {
         this._build();
     }
 
-    // ── Movement API (driven by EnemyAI) ─────────────────────────────────────
+    // Movement API (driven by EnemyAI)
 
     /**
      * Instruct the creature to walk toward (x, z) at the given speed.
@@ -82,7 +82,7 @@ export class EnemyCreature {
      */
     get hasTarget() { return this._moving && this._target !== null; }
 
-    // ── Per-frame update ──────────────────────────────────────────────────────
+    // Per-frame update
 
     /** Advance movement and animation. Call before EnemyAI.update() each frame. */
     update(deltaTime) {
@@ -101,7 +101,7 @@ export class EnemyCreature {
         });
     }
 
-    // ── Internal movement ─────────────────────────────────────────────────────
+    // Internal movement
 
     _updateMovement(deltaTime) {
         if (!this._moving || !this._target) return;
@@ -128,7 +128,7 @@ export class EnemyCreature {
         }
     }
 
-    // ── Build pipeline ────────────────────────────────────────────────────────
+    // Build pipeline
 
     _build() {
         this._buildBody();

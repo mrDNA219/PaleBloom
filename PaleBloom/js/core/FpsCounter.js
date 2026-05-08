@@ -40,9 +40,7 @@ export class FpsCounter {
         this._el.remove();
     }
 
-    // -------------------------------------------------------------------------
     // Private
-    // -------------------------------------------------------------------------
 
     _createElement() {
         const el = document.createElement('div');

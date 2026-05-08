@@ -11,17 +11,17 @@
  */
 import * as THREE from 'three';
 
-// ── Body geometry constants ───────────────────────────────────────────────────
+// Body geometry constants
 // Change BODY_RADIUS or BODY_SCALE and every surface attachment moves with it.
 const BODY_RADIUS = 0.7;
 const BODY_SCALE  = { x: 0.88, y: 1.08, z: 0.78 };
 
-// ── Lure stalk constants ──────────────────────────────────────────────────────
+// Lure stalk constants
 const STALK_LENGTH = 0.55;
 const STALK_TILT   = 0.22;   // rotation.z in radians — slight forward bend
 const STALK_EMBED  = 0.05;   // how far the stalk base overlaps the body top
 
-// ── Body-space helper ─────────────────────────────────────────────────────────
+// Body-space helper
 // Maps normalised body-space coords to local 3-D offsets from the body centre.
 //   1.0  → exactly at the body surface
 //  >1.0  → outside the surface (fins, lure stalk)
@@ -56,7 +56,7 @@ export class Creature {
         });
     }
 
-    // ── Build pipeline ────────────────────────────────────────────────────────
+    // Build pipeline
 
     _build() {
         this._buildBody();

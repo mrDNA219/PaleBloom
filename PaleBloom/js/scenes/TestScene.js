@@ -28,7 +28,7 @@ import { DIFFICULTY }         from '../core/EnemyConfig.js';
 import { GameHUD }            from '../ui/GameHUD.js';
 import { InteractionManager } from '../ui/InteractionManager.js';
 
-// ── Player movement constants ─────────────────────────────────────────────────
+// Player movement constants
 const PET_SPIN_SPEED       = 1.2;
 const PET_MOVE_SPEED       = 2.2;
 const PET_TURN_SPEED       = 8.0;
@@ -38,11 +38,11 @@ const BOB_SPEED_IDLE       = 2.0;
 const BOB_SPEED_WALK       = 7.0;
 const CLICK_MOVE_THRESHOLD = 5;
 
-// ── Game phase constants ──────────────────────────────────────────────────────
+// Game phase constants
 const HIDE_PHASE_DURATION = 30;   // seconds before the enemy spawns
 const ENEMY_SPAWN_RADIUS  = 20;   // units from origin — far edge of map
 
-// ── Hiding constants ──────────────────────────────────────────────────────────
+// Hiding constants
 const HIDE_RADIUS = 3.5;          // max distance from creature to a hide-able flora
 
 export class TestScene extends Scene {
@@ -94,7 +94,7 @@ export class TestScene extends Scene {
         this._onKeyUp       = null;
     }
 
-    // ── Scene lifecycle ───────────────────────────────────────────────────────
+    // Scene lifecycle
 
     onEnter(renderer) {
         this._buildCamera(renderer.aspectRatio);
@@ -179,7 +179,7 @@ export class TestScene extends Scene {
         renderer.render(this._threeScene, this._camera);
     }
 
-    // ── Scene construction ────────────────────────────────────────────────────
+    // Scene construction
 
     _buildCamera(aspect) {
         this._camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 200);
@@ -275,7 +275,7 @@ export class TestScene extends Scene {
         for (let i = 0; i < 95; i++) place(AlienFoliage.random(), 1.0);
     }
 
-    // ── Per-frame update ──────────────────────────────────────────────────────
+    // Per-frame update
 
     update(deltaTime) {
         this._elapsed += deltaTime;
@@ -325,7 +325,7 @@ export class TestScene extends Scene {
         }
     }
 
-    // ── Game phase management ─────────────────────────────────────────────────
+    // Game phase management
 
     _updatePhase(deltaTime) {
         if (this._phase !== 'hiding') return;
@@ -357,7 +357,7 @@ export class TestScene extends Scene {
         };
     }
 
-    // ── Hiding mechanics ──────────────────────────────────────────────────────
+    // Hiding mechanics
 
     _hideInFlora(flora) {
         // Leave any previous hiding spot
@@ -385,7 +385,7 @@ export class TestScene extends Scene {
         this._hud.setHidden(false);
     }
 
-    // ── Movement helpers ──────────────────────────────────────────────────────
+    // Movement helpers
 
     _updateMovement(deltaTime) {
         if (this._isMoving && this._targetPos) {
@@ -416,7 +416,7 @@ export class TestScene extends Scene {
         }
     }
 
-    // ── Input setup ───────────────────────────────────────────────────────────
+    // Input setup
 
     _setupClickControls(canvas) {
         this._onPointerDown = (e) => {
@@ -463,7 +463,7 @@ export class TestScene extends Scene {
         window.addEventListener('keyup',   this._onKeyUp);
     }
 
-    // ── Click handler ─────────────────────────────────────────────────────────
+    // Click handler
 
     /**
      * Priority order:
@@ -483,15 +483,23 @@ export class TestScene extends Scene {
         const raycaster = new THREE.Raycaster();
         raycaster.setFromCamera(ndc, this._camera);
 
-        // ── 1. If hiding, every click exits — no flora switching allowed ───────
+        // 1. If hiding, every click exits — no flora switching allowed
         if (this._isHiding) {
             this._unhide();
             // Don't move — the player just stepped out; let them click again to move.
             return;
         }
 
-        // ── 2. Check flora (only when not hiding) ─────────────────────────────
-        const floraHits = raycaster.intersectObjects(this._floraMeshes, false);
+        // 2. Check flora — only test meshes from flora already within hide range
+        const cp   = this._creature.group.position;
+        const rSq  = HIDE_RADIUS * HIDE_RADIUS;
+        const near = this._floraMeshes.filter(mesh => {
+            const fp = mesh.userData.floraInstance?.group.position;
+            if (!fp) return false;
+            const dx = fp.x - cp.x, dz = fp.z - cp.z;
+            return dx * dx + dz * dz <= rSq;
+        });
+        const floraHits = raycaster.intersectObjects(near, false);
         if (floraHits.length > 0) {
             const flora = floraHits[0].object.userData.floraInstance;
             if (flora && this._withinHideRange(flora)) {
@@ -500,7 +508,7 @@ export class TestScene extends Scene {
             }
         }
 
-        // ── 3. Check ground ───────────────────────────────────────────────────
+        // 3. Check ground
 
         const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
         const hit = new THREE.Vector3();
@@ -523,7 +531,7 @@ export class TestScene extends Scene {
     }
 }
 
-// ── Module utility ────────────────────────────────────────────────────────────
+// Module utility
 function _lerpAngle(current, target, t) {
     let diff = target - current;
     while (diff >  Math.PI) diff -= 2 * Math.PI;

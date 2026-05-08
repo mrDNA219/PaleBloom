@@ -18,7 +18,7 @@ import { pick, PALETTE_GLOW } from '../palette.js';
 
 const TYPES = ['mushroom', 'pod', 'frond'];
 
-// ── Internal helpers ──────────────────────────────────────────────────────────
+// Internal helpers
 function rnd(min, max)    { return min + Math.random() * (max - min); }
 function rndInt(min, max) { return Math.floor(rnd(min, max + 1)); }
 
@@ -101,7 +101,7 @@ export class AlienFoliage {
         });
     }
 
-    // ── Build pipeline ────────────────────────────────────────────────────────
+    // Build pipeline
 
     _build() {
         const { type, glowColor } = this._cfg;
@@ -110,7 +110,7 @@ export class AlienFoliage {
         else                           this._buildFrond(glowColor);
     }
 
-    // ── Types ─────────────────────────────────────────────────────────────────
+    // Types
 
     /**
      * Mushroom: dark organic stem + glowing domed cap.

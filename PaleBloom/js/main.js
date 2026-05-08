@@ -14,7 +14,7 @@ const container = document.getElementById('app');
 const renderer = new Renderer(container);
 const game     = new Game(renderer, { showFps: true });
 
-// --- Debug panel ---
+// Debug panel
 const debug = new DebugPanel();
 debug.addToggle('FPS Counter', true, (enabled) => game.setShowFps(enabled));
 

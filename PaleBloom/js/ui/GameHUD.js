@@ -14,7 +14,7 @@ export class GameHUD {
         this._buildDOM();
     }
 
-    // ── Public API ────────────────────────────────────────────────────────────
+    // Public API
 
     /**
      * Update the countdown display. Only visible during 'hiding' phase.
@@ -62,7 +62,7 @@ export class GameHUD {
         this._root?.remove();
     }
 
-    // ── DOM construction ──────────────────────────────────────────────────────
+    // DOM construction
 
     _buildDOM() {
         this._root = document.createElement('div');
@@ -77,7 +77,7 @@ export class GameHUD {
             zIndex:        '100',
         });
 
-        // ── Phase message (top-center) ────────────────────────────────────────
+        // Phase message (top-center)
         this._phaseEl = document.createElement('div');
         Object.assign(this._phaseEl.style, {
             textAlign:   'center',
@@ -90,7 +90,7 @@ export class GameHUD {
         });
         this._root.appendChild(this._phaseEl);
 
-        // ── Timer wrapper (top-center, below phase) ───────────────────────────
+        // Timer wrapper (top-center, below phase)
         this._timerWrap = document.createElement('div');
         Object.assign(this._timerWrap.style, { textAlign: 'center' });
 
@@ -107,7 +107,7 @@ export class GameHUD {
         this._timerWrap.appendChild(this._timerEl);
         this._root.appendChild(this._timerWrap);
 
-        // ── Hidden badge (bottom-center) ──────────────────────────────────────
+        // Hidden badge (bottom-center)
         this._hiddenEl = document.createElement('div');
         Object.assign(this._hiddenEl.style, {
             position:      'fixed',

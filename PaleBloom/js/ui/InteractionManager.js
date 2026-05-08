@@ -44,7 +44,7 @@ export class InteractionManager {
         window.addEventListener('keydown', this._onKeyDown);
     }
 
-    // ── Registration ──────────────────────────────────────────────────────────
+    // Registration
 
     /**
      * Register an object the player can interact with.
@@ -66,7 +66,7 @@ export class InteractionManager {
         }
     }
 
-    // ── Per-frame update ──────────────────────────────────────────────────────
+    // Per-frame update
 
     /**
      * Check proximity of all registered entries against the player position.
@@ -114,7 +114,7 @@ export class InteractionManager {
         if (!enabled) this._hidePrompt();
     }
 
-    // ── Cleanup ───────────────────────────────────────────────────────────────
+    // Cleanup
 
     dispose() {
         window.removeEventListener('keydown', this._onKeyDown);
@@ -124,7 +124,7 @@ export class InteractionManager {
         this._active  = null;
     }
 
-    // ── DOM helpers ───────────────────────────────────────────────────────────
+    // DOM helpers
 
     _buildPrompt() {
         const el = document.createElement('div');

@@ -12,43 +12,43 @@
 </head>
 <body>
 <script>
-    // --- Scene ---
+    // Scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000a14);
 
-    // --- Camera ---
+    // Camera
     const camera = new THREE.PerspectiveCamera(60, 650 / 500, 0.1, 100);
     camera.position.set(0, 1.5, 4);
     camera.lookAt(0, 0, 0);
 
-    // --- Renderer ---
+    // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // --- Resize handler ---
+    // Resize handler
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // --- Lighting ---
+    // Lighting
     scene.add(new THREE.AmbientLight(0xffffff, 1));
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 3);
     dirLight.position.set(5, 10, 5);
     scene.add(dirLight);
 
-    // --- Simple rotating cube ---
+    // Simple rotating cube
     const cube = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
         new THREE.MeshStandardMaterial({ color: 0x0055cc })
     );
     scene.add(cube);
 
-    // --- Animate ---
+    // Animate
     function animate() {
         requestAnimationFrame(animate);
         cube.rotation.x += 0.01;

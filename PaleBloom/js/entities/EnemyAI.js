@@ -20,10 +20,11 @@
  * The AI fires an optional callback when it catches the player:
  *   ai.onCatch = () => { /* game-over logic *\/ };
  */
+
 import * as THREE from 'three';
 import { SEARCH_QUALITY } from '../core/EnemyConfig.js';
 
-// ── Tuning ────────────────────────────────────────────────────────────────────
+// Tuning
 const CATCH_DIST         = 1.1;   // world units — triggers onCatch
 const ALERT_SLOW_FACTOR  = 0.55;  // patrol speed multiplier while suspicious
 const SEARCH_WAYPOINT_R  = 5.0;   // radius of the search grid/ring around LKP
@@ -31,7 +32,7 @@ const PATROL_WAIT_MIN    = 0.6;   // seconds to idle between patrol waypoints
 const PATROL_WAIT_MAX    = 2.2;
 const ALERT_DECAY_RATE   = 0.25;  // suspicion lost per second when out of view
 
-// ── States ────────────────────────────────────────────────────────────────────
+// States
 const STATE = Object.freeze({
     PATROL: 'patrol',
     ALERT:  'alert',
@@ -39,7 +40,7 @@ const STATE = Object.freeze({
     SEARCH: 'search',
 });
 
-// ── Helper ────────────────────────────────────────────────────────────────────
+// Helper
 function rnd(min, max) { return min + Math.random() * (max - min); }
 
 export class EnemyAI {
@@ -66,7 +67,7 @@ export class EnemyAI {
         this._buildChokepoints();
     }
 
-    // ── Public API ────────────────────────────────────────────────────────────
+    // Public API
 
     /**
      * Advance the AI one tick.
@@ -91,7 +92,7 @@ export class EnemyAI {
     get state()      { return this._state; }
     get suspicion()  { return this._suspicion; }
 
-    // ── Perception helpers ────────────────────────────────────────────────────
+    // Perception helpers
 
     /**
      * Returns a [0, 1] visibility factor:
@@ -154,7 +155,7 @@ export class EnemyAI {
         return Math.max(0, vis);
     }
 
-    // ── State ticks ───────────────────────────────────────────────────────────
+    // State ticks
 
     _tickPatrol(dt, playerGroup, isHiding, hidingFlora) {
         const vis = this._visibilityOf(playerGroup, isHiding, hidingFlora, dt);
@@ -273,7 +274,7 @@ export class EnemyAI {
         }
     }
 
-    // ── State transitions ─────────────────────────────────────────────────────
+    // State transitions
 
     _enterAlert() {
         if (this._state === STATE.ALERT) return;
@@ -294,7 +295,7 @@ export class EnemyAI {
         this._buildSearchQueue(this._lkp ?? this._c.group.position);
     }
 
-    // ── Patrol movement ───────────────────────────────────────────────────────
+    // Patrol movement
 
     _doPatrolMovement(dt) {
         if (this._c.hasTarget) return;
@@ -355,7 +356,7 @@ export class EnemyAI {
         return { x, z };
     }
 
-    // ── Search-mode waypoint generation ──────────────────────────────────────
+    // Search-mode waypoint generation
 
     _buildSearchQueue(origin) {
         this._searchQueue = [];
@@ -418,7 +419,7 @@ export class EnemyAI {
         }
     }
 
-    // ── Chokepoints ───────────────────────────────────────────────────────────
+    // Chokepoints
 
     _buildChokepoints() {
         // Player start is the most likely high-traffic point

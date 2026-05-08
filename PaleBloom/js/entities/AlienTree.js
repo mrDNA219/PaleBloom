@@ -15,7 +15,7 @@
 import * as THREE from 'three';
 import { pick, PALETTE_GLOW, PALETTE_BARK } from '../palette.js';
 
-// ── Internal helpers ──────────────────────────────────────────────────────────
+// Internal helpers
 function rnd(min, max)    { return min + Math.random() * (max - min); }
 function rndInt(min, max) { return Math.floor(rnd(min, max + 1)); }
 
@@ -105,7 +105,7 @@ export class AlienTree {
         });
     }
 
-    // ── Build pipeline ────────────────────────────────────────────────────────
+    // Build pipeline
 
     _build() {
         const { height, trunkColor, branchCount, glowColor, canopyStyle } = this._cfg;
@@ -178,7 +178,7 @@ export class AlienTree {
         }
     }
 
-    // ── Canopy styles ─────────────────────────────────────────────────────────
+    // Canopy styles
 
     /**
      * Flat disc canopy with a ring of glowing nodes along the rim.
@@ -282,7 +282,7 @@ export class AlienTree {
         }
     }
 
-    // ── Shared helper ─────────────────────────────────────────────────────────
+    // Shared helper
 
     _addGlowNode(position, color, radius) {
         const node = new THREE.Mesh(

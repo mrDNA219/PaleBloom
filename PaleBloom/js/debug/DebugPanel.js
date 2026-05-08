@@ -22,9 +22,7 @@ export class DebugPanel {
         });
     }
 
-    // -------------------------------------------------------------------------
     // Public API
-    // -------------------------------------------------------------------------
 
     /**
      * Add a labelled on/off toggle to the panel.
@@ -53,19 +51,17 @@ export class DebugPanel {
         this._panel.appendChild(row);
     }
 
-    // -------------------------------------------------------------------------
     // Private — DOM construction
-    // -------------------------------------------------------------------------
 
     _buildDOM() {
-        // --- Toggle button (always visible) ---
+        // Toggle button (always visible)
         this._btn = document.createElement('button');
         this._btn.textContent = 'DEV';
         Object.assign(this._btn.style, STYLES.button);
         this._btn.addEventListener('click', () => this._toggle());
         document.body.appendChild(this._btn);
 
-        // --- Panel ---
+        // Panel
         this._panel = document.createElement('div');
         Object.assign(this._panel.style, STYLES.panel);
         this._panel.style.display = 'none';
@@ -93,9 +89,7 @@ export class DebugPanel {
     }
 }
 
-// -------------------------------------------------------------------------
 // Styles — defined once as a plain object to keep the class body readable
-// -------------------------------------------------------------------------
 const STYLES = {
     button: {
         position:       'fixed',

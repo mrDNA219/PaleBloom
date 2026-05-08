@@ -13,7 +13,7 @@
  *   const custom = lerpConfig(DIFFICULTY.MEDIUM, DIFFICULTY.HARD, 0.6);
  */
 
-// ── Search quality enum ───────────────────────────────────────────────────────
+// Search quality enum
 export const SEARCH_QUALITY = Object.freeze({
     /**
      * Wanders randomly. Will miss large portions of the map.
@@ -34,10 +34,10 @@ export const SEARCH_QUALITY = Object.freeze({
     SYSTEMATIC: 'systematic',
 });
 
-// ── Base template ─────────────────────────────────────────────────────────────
+// Base template
 // All presets spread from this, overriding only what differs.
 const BASE = {
-    // ── Perception ────────────────────────────────────────────────────────────
+    // Perception
 
     /** Full angle (degrees) of the vision cone. Easy = narrow tunnel. */
     fovAngle:              60,
@@ -66,7 +66,7 @@ const BASE = {
      */
     memoryDuration:        12,
 
-    // ── Search behaviour ──────────────────────────────────────────────────────
+    // Search behaviour
 
     /** How the AI covers space when patrolling or searching. */
     searchQuality:         SEARCH_QUALITY.SWEEP,
@@ -87,7 +87,7 @@ const BASE = {
      */
     chokepointAwareness:   false,
 
-    // ── Physical ──────────────────────────────────────────────────────────────
+    // Physical
 
     /** World units per second during patrol / search. */
     moveSpeed:             2.4,
@@ -103,7 +103,7 @@ const BASE = {
     reDetectionCooldown:   4.0,
 };
 
-// ── Difficulty presets ────────────────────────────────────────────────────────
+// Difficulty presets
 
 export const DIFFICULTY = Object.freeze({
 

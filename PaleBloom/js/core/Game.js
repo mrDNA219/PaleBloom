@@ -73,9 +73,7 @@ export class Game {
         this._rafId = requestAnimationFrame(this._loop.bind(this));
     }
 
-    // -------------------------------------------------------------------------
     // Private
-    // -------------------------------------------------------------------------
 
     _loop(timestamp) {
         if (!this._running) return;
