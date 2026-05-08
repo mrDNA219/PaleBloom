@@ -27,6 +27,7 @@ import { EnemyAI }            from '../entities/EnemyAI.js';
 import { DIFFICULTY }         from '../core/EnemyConfig.js';
 import { GameHUD }            from '../ui/GameHUD.js';
 import { InteractionManager } from '../ui/InteractionManager.js';
+import { ControlsDisplay }    from '../ui/ControlsDisplay.js';
 
 // Player movement constants
 const PET_SPIN_SPEED       = 1.2;
@@ -82,7 +83,8 @@ export class TestScene extends Scene {
         this._floraMeshes = [];     // flat list of all flora Mesh objects for raycasting
 
         // HUD
-        this._hud = null;
+        this._hud             = null;
+        this._controlsDisplay = null;
 
         // Tab-to-orbit
         this._tabHeld = false;
@@ -135,6 +137,8 @@ export class TestScene extends Scene {
         this._hud.setPhase('hiding');
         this._hud.setTime(HIDE_PHASE_DURATION);
 
+        this._controlsDisplay = new ControlsDisplay();
+
         this._setupClickControls(renderer.three.domElement);
         this._setupKeyControls();
 
@@ -162,6 +166,7 @@ export class TestScene extends Scene {
         this._creature?.dispose();
         this._enemy?.dispose();
         this._hud?.dispose();
+        this._controlsDisplay?.dispose();
         this._interactionManager?.dispose();
 
         if (this._hideRing) {
